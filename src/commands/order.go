@@ -29,7 +29,7 @@ func sortMapByValue(m map[string]int) map[string]int {
 
 	// Sort the slice by value
 	sort.Slice(entries, func(i, j int) bool {
-		return entries[i].value < entries[j].value
+		return entries[i].value > entries[j].value
 	})
 
 	// Create a new map with the sorted entries
