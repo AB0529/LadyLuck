@@ -1,0 +1,6 @@
+{
+    "token": "BOT_TOKEN_HERE",
+    "prefix": "!",
+    "messagesAppearInCertainChannels": false,
+    "messageChannelID": "CHANNEL_ID"
+}
