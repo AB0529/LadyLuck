@@ -13,6 +13,34 @@ import (
 	"github.com/AB0529/lady_luck/src/dice"
 )
 
+type mapEntry struct {
+	key   string
+	value int
+}
+
+func sortMapByValue(m map[string]int) map[string]int {
+	// Create a slice of map entries
+	entries := make([]mapEntry, len(m))
+	i := 0
+	for k, v := range m {
+		entries[i] = mapEntry{k, v}
+		i++
+	}
+
+	// Sort the slice by value
+	sort.Slice(entries, func(i, j int) bool {
+		return entries[i].value < entries[j].value
+	})
+
+	// Create a new map with the sorted entries
+	sortedMap := make(map[string]int)
+	for _, entry := range entries {
+		sortedMap[entry.key] = entry.value
+	}
+
+	return sortedMap
+}
+
 func SortMapByValue(inputMap map[string]int) map[string]int {
 	// Convert the map to a slice of key-value pairs
 	pairs := make([][2]interface{}, len(inputMap))
