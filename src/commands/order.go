@@ -58,11 +58,28 @@ func Order() {
 				resultStr := ""
 
 				rand.Seed(time.Now().UnixNano())
-				
+
 				for _, name := range names {
 					// Filter out name from math exp
 					re := regexp.MustCompile(`([a-zA-Z]+)([\+\-\*/])(\d+)`)
 					matches := re.FindAllStringSubmatch(name, -1)
+
+					if len(matches) <= 0 {
+						_, diceNumber, mathExp, err := ParseDiceExpression("1d20")
+						if err != nil {
+							ctx.Embedf(":x: | Uh oh something went wrong...\n```css\n%s\n```", err.Error())
+						}
+
+						die := &dice.Dice{
+							Sides:       diceNumber,
+							Expressions: mathExp,
+						}
+
+						sum, _ := dice.RollDie(die)
+						result[name] = sum
+						continue
+					}
+
 					for _, match := range matches {
 						symbol := match[2]
 						number, _ := strconv.Atoi(match[3])
