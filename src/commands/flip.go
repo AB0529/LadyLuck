@@ -19,9 +19,7 @@ func Flip() {
 			Handler: func(ctx *dgowrapper.Context) {
 				rand.Seed(time.Now().UnixNano())
 				c := rand.Intn(10)
-				// Delete author message
-				ctx.Session.ChannelMessageDelete(ctx.Message.ChannelID, ctx.Message.ID)
-
+				
 				if c%2 == 0 {
 					ctx.Session.ChannelMessageSendComplex(ctx.Message.ChannelID, &discordgo.MessageSend{
 						Embed: &discordgo.MessageEmbed{

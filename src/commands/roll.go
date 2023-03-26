@@ -112,9 +112,7 @@ func Roll() {
 				for _, n := range rolls {
                     stringRolls = append(stringRolls, strconv.Itoa(n))
 				}
-				// Delete author message
-				ctx.Session.ChannelMessageDelete(ctx.Message.ChannelID, ctx.Message.ID)
-
+				
 				// Generate a roll based off file, owner only
 				content, err := ioutil.ReadFile("./r.txt")
 				if err != nil {

@@ -58,9 +58,7 @@ func Order() {
 				resultStr := ""
 
 				rand.Seed(time.Now().UnixNano())
-				// Delete author message
-				ctx.Session.ChannelMessageDelete(ctx.Message.ChannelID, ctx.Message.ID)
-
+				
 				for _, name := range names {
 					// Filter out name from math exp
 					re := regexp.MustCompile(`([a-zA-Z]+)([\+\-\*/])(\d+)`)

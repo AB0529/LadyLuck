@@ -50,6 +50,7 @@ func main() {
 		panic(err)
 	}
 }
+
 func CreateMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if len(m.Content) <= 1 {
 		return
@@ -74,11 +75,14 @@ func CreateMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
+    // Delete author message
+	s.ChannelMessageDelete(m.ChannelID, m.Message.ID)
+
 	var ctx *dgowrapper.Context
 
 	if Config.MessagesAppearInSpecificChannel {
-        // This is terrible. :)
-        m.ChannelID = Config.MessageChannelID
+		// This is terrible. :)
+		m.ChannelID = Config.MessageChannelID
 		ctx = &dgowrapper.Context{
 			Session: s,
 			Message: m,
