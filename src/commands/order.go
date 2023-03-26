@@ -17,52 +17,25 @@ type mapEntry struct {
 	key   string
 	value int
 }
-
-func sortMapByValue(m map[string]int) map[string]int {
-	// Create a slice of map entries
-	entries := make([]mapEntry, len(m))
-	i := 0
+func sortMapDescending(m map[string]int) map[string]int {
+	// create a slice of map entries
+	var entries []mapEntry
 	for k, v := range m {
-		entries[i] = mapEntry{k, v}
-		i++
+		entries = append(entries, mapEntry{k, v})
 	}
 
-	// Sort the slice by value
+	// sort the slice in descending order
 	sort.Slice(entries, func(i, j int) bool {
 		return entries[i].value > entries[j].value
 	})
 
-	// Create a new map with the sorted entries
+	// create a new map and add the sorted entries
 	sortedMap := make(map[string]int)
 	for _, entry := range entries {
 		sortedMap[entry.key] = entry.value
 	}
 
 	return sortedMap
-}
-
-func SortMapByValue(inputMap map[string]int) map[string]int {
-	// Convert the map to a slice of key-value pairs
-	pairs := make([][2]interface{}, len(inputMap))
-	i := 0
-	for k, v := range inputMap {
-		pairs[i] = [2]interface{}{k, v}
-		i++
-	}
-
-	// Sort the slice by value
-	sort.Slice(pairs, func(i, j int) bool {
-		return pairs[i][1].(int) < pairs[j][1].(int)
-	})
-
-	// Convert the sorted slice back to a map
-	outputMap := make(map[string]int, len(pairs))
-	for _, pair := range pairs {
-		key := pair[0].(string)
-		value := pair[1].(int)
-		outputMap[key] = value
-	}
-	return outputMap
 }
 
 func Order() {
@@ -128,7 +101,7 @@ func Order() {
 
 				}
 
-				result = SortMapByValue(result)
+				result = sortMapDescending(result)
 				i := 1
 
 				for k, v := range result {
