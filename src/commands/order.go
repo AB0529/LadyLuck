@@ -24,7 +24,7 @@ func SortMapByValue(inputMap map[string]int) map[string]int {
 
 	// Sort the slice by value
 	sort.Slice(pairs, func(i, j int) bool {
-		return pairs[i][1].(int) > pairs[j][1].(int)
+		return pairs[i][1].(int) < pairs[j][1].(int)
 	})
 
 	// Convert the sorted slice back to a map
